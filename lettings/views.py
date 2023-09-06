@@ -1,3 +1,4 @@
+import sentry_sdk
 from django.shortcuts import render
 
 from .models import Letting
@@ -25,10 +26,16 @@ def index(request):
 # eget bibendum lorem. Sed non dolor risus. Mauris condimentum auctor elementum. Donec quis
 # nisi ligula. Integer vehicula tincidunt enim, ac lacinia augue pulvinar sit amet.
 def letting(request, letting_id):
-    """Displays the details of a selected letting."""
-    letting = Letting.objects.get(id=letting_id)
-    context = {
-        "title": letting.title,
-        "address": letting.address,
-    }
-    return render(request, "lettings/letting.html", context)
+    """Displays the details of a selected letting.
+    In case of an error, send a message to Sentry and
+    returns the Error 500 page."""
+    try:
+        letting = Letting.objects.get(id=letting_id)
+        context = {
+            "title": letting.title,
+            "address": letting.address,
+        }
+        return render(request, "lettings/letting.html", context)
+    except Exception as err:
+        sentry_sdk.capture_exception(err)
+        return render(request, "500.html")

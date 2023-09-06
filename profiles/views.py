@@ -1,3 +1,4 @@
+import sentry_sdk
 from django.shortcuts import render
 
 from .models import Profile
@@ -20,6 +21,10 @@ def index(request):
 # Pellentesque habitant morbi tristique senectus et netus et males
 def profile(request, username):
     """Displays the profile's details of a selected user."""
-    profile = Profile.objects.get(user__username=username)
-    context = {"profile": profile}
-    return render(request, "profiles/profile.html", context)
+    try:
+        profile = Profile.objects.get(user__username=username)
+        context = {"profile": profile}
+        return render(request, "profiles/profile.html", context)
+    except Exception as err:
+        sentry_sdk.capture_exception(err)
+        return render(request, "500.html")
