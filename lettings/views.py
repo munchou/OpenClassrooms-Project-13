@@ -11,9 +11,14 @@ from .models import Letting
 def index(request):
     """Letting's main page.
     Displays all the available lettings (list of the titles)."""
-    lettings_list = Letting.objects.all()
-    context = {"lettings_list": lettings_list}
-    return render(request, "lettings/index.html", context)
+    try:
+        lettings_list = Letting.objects.all()
+        context = {"lettings_list": lettings_list}
+        return render(request, "lettings/index.html", context)
+    except Exception as err:
+        sentry_sdk.capture_message(f"500 error: {err} {request}")
+        # sentry_sdk.capture_exception(err)
+        return render(request, "500.html")
 
 
 # Cras ultricies dignissim purus, vitae hendrerit ex varius non. In accumsan porta nisl
@@ -37,5 +42,6 @@ def letting(request, letting_id):
         }
         return render(request, "lettings/letting.html", context)
     except Exception as err:
-        sentry_sdk.capture_exception(err)
+        sentry_sdk.capture_message(f"500 error: {err} {request}")
+        # sentry_sdk.capture_exception(err)
         return render(request, "500.html")

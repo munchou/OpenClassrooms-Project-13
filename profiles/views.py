@@ -10,9 +10,14 @@ from .models import Profile
 def index(request):
     """Profile's main page.
     Displays all the available user profiles (list of the usernames)."""
-    profiles_list = Profile.objects.all()
-    context = {"profiles_list": profiles_list}
-    return render(request, "profiles/index.html", context)
+    try:
+        profiles_list = Profile.objects.all()
+        context = {"profiles_list": profiles_list}
+        return render(request, "profiles/index.html", context)
+    except Exception as err:
+        sentry_sdk.capture_message(f"500 error: {err} {request}")
+        # sentry_sdk.capture_exception(err)
+        return render(request, "500.html")
 
 
 # Aliquam sed metus eget nisi tincidunt ornare accumsan eget lac
@@ -26,5 +31,6 @@ def profile(request, username):
         context = {"profile": profile}
         return render(request, "profiles/profile.html", context)
     except Exception as err:
-        sentry_sdk.capture_exception(err)
+        sentry_sdk.capture_message(f"500 error: {err} {request}")
+        # sentry_sdk.capture_exception(err)
         return render(request, "500.html")

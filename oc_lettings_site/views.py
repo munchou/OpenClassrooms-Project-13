@@ -1,3 +1,4 @@
+# import sentry_sdk
 from django.shortcuts import render
 
 
@@ -15,12 +16,12 @@ def index(request):
 def page_not_found_view(request, exception):
     """A customized 404 page that is actually the index
     with the error message and its code."""
-
+    # sentry_sdk.capture_message(f"404 error: {request}")
     return render(request, "404.html", status=404)
 
 
-def server500(request):
-    """A customized 500 page that is actually the index
-    with the error message and its code."""
-
-    return render(request, "500.html", status=500)
+# def server500(request):
+#     """A customized 500 page that is actually the index
+#     with the error message and its code."""
+#     sentry_sdk.capture_message(f"500 error: {request}")
+#     return render(request, "500.html", status=500)
