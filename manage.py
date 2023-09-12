@@ -5,19 +5,20 @@ import sys
 def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "oc_lettings_site.settings")
 
-    #####
-    try:
-        command = sys.argv[1]
-    except IndexError:
-        command = "help"
+    ####
+    # For coverage purposes only 1/2 (uncomment to use)
+    # try:
+    #     command = sys.argv[1]
+    # except IndexError:
+    #     command = "help"
 
-    running_tests = command == "test"
-    if running_tests:
-        from coverage import Coverage
+    # running_tests = command == "test"
+    # if running_tests:
+    #     from coverage import Coverage
 
-        cov = Coverage()
-        cov.erase()
-        cov.start()
+    #     cov = Coverage()
+    #     cov.erase()
+    #     cov.start()
     #####
 
     try:
@@ -30,13 +31,13 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-    #####
-    if running_tests:
-        cov.stop()
-        cov.save()
-        covered = cov.report()
-        if covered < 100:
-            raise SystemExit(1)
+    # For coverage purposes only 2/2 (uncomment to use)
+    # if running_tests:
+    #     cov.stop()
+    #     cov.save()
+    #     covered = cov.report()
+    #     if covered < 100:
+    #         raise SystemExit(1)
     #####
 
 

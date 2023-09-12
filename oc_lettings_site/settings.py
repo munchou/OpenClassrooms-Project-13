@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
+SECRET_KEY = os.environ.get("django_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -22,7 +22,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 sentry_sdk.init(
-    dsn="https://1952da96bd5dbb7dfed36c93e89d0265@o4505691007680512.ingest.sentry.io/4505825158758400",
+    dsn=os.environ.get("sentry_dsn"),
     integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.

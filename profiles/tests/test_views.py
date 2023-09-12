@@ -30,3 +30,9 @@ class ProfilesViewsTest(TestCase):
     def test_profile_error500(self):
         response = self.client.get(reverse("profiles:profile", args=[456452312]))
         self.assertTemplateUsed(response, "500.html")
+
+    # def test_profile_error500(self):
+    #     try:
+    #         profile = Profile.objects.get(reverse("profiles:profile", args=[456452312]))
+    #     except Exception as err:
+    #         self.assertTemplateUsed("500.html")
