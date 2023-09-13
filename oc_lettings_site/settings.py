@@ -15,11 +15,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+
 env_file = os.path.join(BASE_DIR, ".env")
 config = ConfigParser()
 config.read(env_file)
-SECRET_KEY = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
+
+try:
+    django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
+except Exception:
+    django_key = os.environ.get("DJANGO_SECRET_KEY")
+
+SECRET_KEY = django_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -27,9 +33,13 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
+try:
+    sentry_dsn = config.get("SENTRY", "SENTRY_DSN")
+except Exception:
+    sentry_dsn = os.environ.get("SENTRY_DSN")
+
 sentry_sdk.init(
-    # dsn=os.environ.get("SENTRY_DSN"),
-    dsn=config.get("SENTRY", "SENTRY_DSN"),
+    dsn=sentry_dsn,
     integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
