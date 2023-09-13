@@ -1,6 +1,7 @@
 **/__pycache__
 *.pyc
 _env
+.env
 sqlite3.exe
 _oldfiles
 .flake8

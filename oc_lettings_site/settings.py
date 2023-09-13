@@ -1,9 +1,11 @@
 import os
 
+from configparser import ConfigParser
+from pathlib import Path
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,16 +15,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("django_secret_key")
+# SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+env_file = os.path.join(BASE_DIR, ".env")
+config = ConfigParser()
+config.read(env_file)
+SECRET_KEY = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
 sentry_sdk.init(
-    dsn=os.environ.get("sentry_dsn"),
+    # dsn=os.environ.get("SENTRY_DSN"),
+    dsn=config.get("SENTRY", "SENTRY_DSN"),
     integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
@@ -46,6 +53,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "oc_lettings_site.urls"
@@ -132,3 +141,6 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+# if not DEBUG:
+#     STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
