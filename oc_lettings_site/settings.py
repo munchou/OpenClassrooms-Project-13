@@ -1,5 +1,6 @@
 import os
 
+# from django.core.exceptions import ImproperlyConfigured
 from configparser import ConfigParser
 from pathlib import Path
 
@@ -15,15 +16,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-env_file = os.path.join(BASE_DIR, ".env")
-config = ConfigParser()
-config.read(env_file)
-
+env_ok = False
 try:
-    django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
+    env_file = os.path.join(BASE_DIR, ".env")
+    env_ok = True
+
 except Exception:
+    print("\n\tNO .env file")
+
+if env_ok:
+    config = ConfigParser()
+    config.read(env_file)
+    django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
+    sentry_dsn = config.get("SENTRY", "SENTRY_DSN")
+else:
     django_key = os.environ.get("DJANGO_SECRET_KEY")
+    sentry_dsn = os.environ.get("SENTRY_DSN")
 
 SECRET_KEY = django_key
 
@@ -33,10 +41,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-try:
-    sentry_dsn = config.get("SENTRY", "SENTRY_DSN")
-except Exception:
-    sentry_dsn = os.environ.get("SENTRY_DSN")
 
 sentry_sdk.init(
     dsn=sentry_dsn,
