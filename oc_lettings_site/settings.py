@@ -18,13 +18,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 env_ok = False
 try:
-    env_file = os.path.join(BASE_DIR, ".env")
-    env_ok = True
+    file = os.path.isfile(".env")
+    if file:
+        print("\t ENV FILE FOUND")
+        env_ok = True
 
 except Exception:
     print("\n\tNO .env file")
 
 if env_ok:
+    env_file = os.path.join(BASE_DIR, ".env")
     config = ConfigParser()
     config.read(env_file)
     django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
