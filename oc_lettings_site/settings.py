@@ -1,4 +1,5 @@
 import os
+import environ
 
 # from django.core.exceptions import ImproperlyConfigured
 from configparser import ConfigParser
@@ -35,8 +36,13 @@ if env_ok:
     django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
     sentry_dsn = config.get("SENTRY", "SENTRY_DSN", raw=True)
 else:
+    env = environ.Env(
+        # set casting, default value
+        DEBUG=(bool, False)
+    )
     print("\n\tNO ENV file")
-    django_key = os.environ.get("DJANGO_SECRET_KEY")
+    # django_key = os.environ.get("DJANGO_SECRET_KEY")
+    django_key = env("DJANGO_SECRET_KEY")
     sentry_dsn = os.environ.get("SENTRY_DSN")
 
 

@@ -4,8 +4,6 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     environment:
-      # ARG DJANGO_SECRET_KEY
-      # ARG SENTRY_DSN
       ENV DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
       ENV SENTRY_DSN: $SENTRY_DSN
     steps:
