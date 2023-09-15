@@ -35,6 +35,7 @@ if env_ok:
     django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
     sentry_dsn = config.get("SENTRY", "SENTRY_DSN")
 else:
+    print("\n\tENV else option")
     django_key = os.environ.get("DJANGO_SECRET_KEY")
     sentry_dsn = os.environ.get("SENTRY_DSN")
 
