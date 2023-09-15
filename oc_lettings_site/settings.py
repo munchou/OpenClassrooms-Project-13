@@ -28,6 +28,8 @@ DEBUG = env("DEBUG")
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 sentry_dsn = env("SENTRY_DSN")
 
+print(env)
+
 """env_ok = False
 try:
     file = os.path.isfile(".env")
