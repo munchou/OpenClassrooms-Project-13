@@ -16,6 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+
 env_ok = False
 try:
     file = os.path.isfile(".env")
@@ -24,7 +26,7 @@ try:
         env_ok = True
 
 except Exception:
-    print("\n\tNO .env file")
+    print("\n\tNO ENV file")
 
 if env_ok:
     env_file = os.path.join(BASE_DIR, ".env")
@@ -35,6 +37,19 @@ if env_ok:
 else:
     django_key = os.environ.get("DJANGO_SECRET_KEY")
     sentry_dsn = os.environ.get("SENTRY_DSN")
+
+
+"""
+if not os.path.isfile("config.ini"):
+    with open("config.ini", "w") as env_file:
+        config = ConfigParser()
+        config["DJANGO"] = {"DJANGO_SECRET_KEY": "django_secret_key"}
+        config["SENTRY"] = {"SENTRY_DSN": "sentry_dsn"}
+        config.write(env_file)
+
+django_key = os.environ.get("DJANGO_SECRET_KEY")
+sentry_dsn = os.environ.get("SENTRY_DSN")
+"""
 
 SECRET_KEY = django_key
 
