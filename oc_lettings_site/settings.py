@@ -1,12 +1,12 @@
 import os
-import environ
 
-# from django.core.exceptions import ImproperlyConfigured
 from configparser import ConfigParser
 from pathlib import Path
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+import environ
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -16,7 +16,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 env = environ.Env(DEBUG=(bool, False))
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +27,6 @@ DEBUG = env("DEBUG")
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 sentry_dsn = env("SENTRY_DSN")
 
-print(env)
 
 """env_ok = False
 try:
@@ -73,7 +71,7 @@ sentry_dsn = os.environ.get("SENTRY_DSN")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 

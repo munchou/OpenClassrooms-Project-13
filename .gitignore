@@ -4,4 +4,6 @@ _env
 .env
 sqlite3.exe
 _oldfiles
+staticfiles
+.coverage
 .flake8
