@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
     environment:
-      ENV DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
-      ENV SENTRY_DSN: $SENTRY_DSN
+      DJANGO_SECRET_KEY: DJANGO_SECRET_KEY
+      SENTRY_DSN: SENTRY_DSN
     steps:
       - checkout
       - restore_cache:
