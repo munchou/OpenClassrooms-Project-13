@@ -3,9 +3,6 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.10.2
-    environment:
-      ENV DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
-      ENV SENTRY_DSN: $SENTRY_DSN
     steps:
       - checkout
       - restore_cache:
@@ -15,8 +12,8 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            echo $ENV DJANGO_SECRET_KEY
-            echo $ENV SENTRY_DSN
+            echo DJANGO_SECRET_KEY:$DJANGO_SECRET_KEY
+            echo SENTRY_DSN:$SENTRY_DSN
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
