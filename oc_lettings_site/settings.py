@@ -26,16 +26,16 @@ try:
         env_ok = True
 
 except Exception:
-    print("\n\tNO ENV file")
+    pass
 
 if env_ok:
     env_file = os.path.join(BASE_DIR, ".env")
     config = ConfigParser()
     config.read(env_file)
     django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
-    sentry_dsn = config.get("SENTRY", "SENTRY_DSN")
+    sentry_dsn = config.get("SENTRY", "SENTRY_DSN", raw=True)
 else:
-    print("\n\tENV else option")
+    print("\n\tNO ENV file")
     django_key = os.environ.get("DJANGO_SECRET_KEY")
     sentry_dsn = os.environ.get("SENTRY_DSN")
 
