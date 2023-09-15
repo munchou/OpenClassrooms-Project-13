@@ -17,9 +17,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+env = environ.Env(DEBUG=(bool, False))
 
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env_ok = False
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+DEBUG = env("DEBUG")
+
+SECRET_KEY = env("DJANGO_SECRET_KEY")
+sentry_dsn = env("SENTRY_DSN")
+
+"""env_ok = False
 try:
     file = os.path.isfile(".env")
     if file:
@@ -43,7 +52,7 @@ else:
     print("\n\tNO ENV file")
     # django_key = os.environ.get("DJANGO_SECRET_KEY")
     django_key = env("DJANGO_SECRET_KEY")
-    sentry_dsn = os.environ.get("SENTRY_DSN")
+    sentry_dsn = os.environ.get("SENTRY_DSN")"""
 
 
 """
@@ -58,7 +67,7 @@ django_key = os.environ.get("DJANGO_SECRET_KEY")
 sentry_dsn = os.environ.get("SENTRY_DSN")
 """
 
-SECRET_KEY = django_key
+# SECRET_KEY = django_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
