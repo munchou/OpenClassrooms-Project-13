@@ -6,8 +6,6 @@ from pathlib import Path
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-import environ
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,23 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-if os.path.isfile(".env"):
-    env = environ.Env(DEBUG=(bool, False))
-    print("\t ENV FILE FOUND")
-    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-    django_key = env("DJANGO_SECRET_KEY")
-    sentry_dsn = env("SENTRY_DSN")
-else:
-    print("\n\tNO ENV file")
-    # django_key = os.getenv("DJANGO_SECRET_KEY")
-    django_key = os.environ.get("DJANGO_SECRET_KEY")
-    print(f"django_key {django_key}")
-    # sentry_dsn = os.getenv("SENTRY_DSN")
-    sentry_dsn = os.environ.get("SENTRY_DSN")
-    print(f"sentry_dsn {sentry_dsn}")
-
-
-"""env_ok = False
+env_ok = False
 try:
     file = os.path.isfile(".env")
     if file:
@@ -48,15 +30,11 @@ if env_ok:
     config.read(env_file)
     django_key = config.get("DJANGO", "DJANGO_SECRET_KEY", raw=True)
     sentry_dsn = config.get("SENTRY", "SENTRY_DSN", raw=True)
+
 else:
-    env = environ.Env(
-        # set casting, default value
-        DEBUG=(bool, False)
-    )
     print("\n\tNO ENV file")
-    # django_key = os.environ.get("DJANGO_SECRET_KEY")
-    django_key = env("DJANGO_SECRET_KEY")
-    sentry_dsn = os.environ.get("SENTRY_DSN")"""
+    django_key = os.environ.get("DJANGO_SECRET_KEY")
+    sentry_dsn = os.environ.get("SENTRY_DSN")
 
 
 SECRET_KEY = django_key
@@ -64,6 +42,7 @@ SECRET_KEY = django_key
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = False
+
 
 ALLOWED_HOSTS = ["*"]
 

@@ -1,7 +1,8 @@
 **/__pycache__
 *.pyc
-_env
+_env*
 .env*
+.env
 sqlite3.exe
 _oldfiles
 staticfiles

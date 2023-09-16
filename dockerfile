@@ -16,7 +16,7 @@ ENV SENTRY_DSN=$SENTRY_DSN
 
 # install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip  
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
 
