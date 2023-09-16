@@ -5,6 +5,12 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - checkout
+      - run:
+        name: Env keys
+          environment:
+            SECRET_KEY: DJANGO_SECRET_KEY
+            SENTRY_DSN: SENTRY_DSN
+          command: npm ci
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:

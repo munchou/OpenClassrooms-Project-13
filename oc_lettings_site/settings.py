@@ -16,19 +16,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-env = environ.Env(DEBUG=(bool, False))
-
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 if os.path.isfile(".env"):
+    env = environ.Env(DEBUG=(bool, False))
     print("\t ENV FILE FOUND")
     environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-    SECRET_KEY = env("DJANGO_SECRET_KEY")
+    django_key = env("DJANGO_SECRET_KEY")
     sentry_dsn = env("SENTRY_DSN")
 else:
     print("\n\tNO ENV file")
-    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-    sentry_dsn = os.getenv("SENTRY_DSN")
+    # django_key = os.getenv("DJANGO_SECRET_KEY")
+    django_key = os.environ.get("DJANGO_SECRET_KEY")
+    print(f"django_key {django_key}")
+    # sentry_dsn = os.getenv("SENTRY_DSN")
+    sentry_dsn = os.environ.get("SENTRY_DSN")
+    print(f"sentry_dsn {sentry_dsn}")
 
 
 """env_ok = False
@@ -58,11 +59,11 @@ else:
     sentry_dsn = os.environ.get("SENTRY_DSN")"""
 
 
-# SECRET_KEY = django_key
+SECRET_KEY = django_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
