@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Env keys
+          name: Env keys
           environment:
             SECRET_KEY: $DJANGO_SECRET_KEY
             SENTRY_DSN: $SENTRY_DSN
