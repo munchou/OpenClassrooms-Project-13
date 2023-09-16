@@ -20,12 +20,15 @@ env = environ.Env(DEBUG=(bool, False))
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
-DEBUG = env("DEBUG")
-
-SECRET_KEY = env("DJANGO_SECRET_KEY")
-sentry_dsn = env("SENTRY_DSN")
+if os.path.isfile(".env"):
+    print("\t ENV FILE FOUND")
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+    SECRET_KEY = env("DJANGO_SECRET_KEY")
+    sentry_dsn = env("SENTRY_DSN")
+else:
+    print("\n\tNO ENV file")
+    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+    sentry_dsn = os.getenv("SENTRY_DSN")
 
 
 """env_ok = False
@@ -54,18 +57,6 @@ else:
     django_key = env("DJANGO_SECRET_KEY")
     sentry_dsn = os.environ.get("SENTRY_DSN")"""
 
-
-"""
-if not os.path.isfile("config.ini"):
-    with open("config.ini", "w") as env_file:
-        config = ConfigParser()
-        config["DJANGO"] = {"DJANGO_SECRET_KEY": "django_secret_key"}
-        config["SENTRY"] = {"SENTRY_DSN": "sentry_dsn"}
-        config.write(env_file)
-
-django_key = os.environ.get("DJANGO_SECRET_KEY")
-sentry_dsn = os.environ.get("SENTRY_DSN")
-"""
 
 # SECRET_KEY = django_key
 
