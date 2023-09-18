@@ -43,6 +43,7 @@ jobs:
 workflows:
   build-master:
     jobs:
+      - build
       - deploy:
           requires:
             - build
