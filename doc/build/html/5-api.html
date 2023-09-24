@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Description of the API &#8212; munchou-p13 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User guide with use cases" href="6-use_cases.html" />
+    <link rel="prev" title="Database and models’ structure" href="4-database.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="description-of-the-api">
+<h1>Description of the API<a class="headerlink" href="#description-of-the-api" title="Link to this heading">¶</a></h1>
+<p>The API consists of 3 apps: <br>
+<strong>oc_lettings_site</strong>, which takes care of the index (homepage), the admin section and the customized 404 page, and links the 2 other apps together. <br></p>
+<p><strong>lettings</strong>, which manages the main page of the rentals as well as each individual page. <br>
+Returns a customized “500 error” in case of bad request (see paragraph about errors below).</p>
+<p><strong>profiles</strong>, which manages the main page of the profiles as well as each individual profile page. <br>
+Returns a customized “500 error” in case of bad request (see paragraph about errors below). <br></p>
+<blockquote>
+<div><p><br></p>
+</div></blockquote>
+<p><strong>In case of errors: Sentry</strong> <br>
+Sentry was implemented in order to warn the administrator in any case any errors were to happen. There is the possibility to return customized errors, which was done in case of “bad request”, or error 500. This happens when the user enters an invalid URL that targets an object that does not exist in the database (wrong letting or profile id). <br>
+As for error 404 (bad URL unrelated to the database), returning an error was not deemed necessary. <br>
+<br>
+Instead of capturing the exception (<em>sentry_sdk.capture_exception(err)</em>) that would display a generic error that does not explicitly show where the error happened, I chose to use a customized message <em>sentry_sdk.capture_message(f”500 error: {err} {request}”)</em> that would return the type of error AND the request. The latter is important as it allows the administrator to see what the user entered that led to the error, and see if it is an error from the system/database or simply a misspelling/type error. <br>
+Django then returns (=displays) the customized 500.html page (<em>return render(request, “500.html”)</em>).</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">munchou-p13</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1-project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-installation.html">Installing the app and necessary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-apprun.html">Quickstart: running the app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-database.html">Database and models' structure</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Description of the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-use_cases.html">User guide with use cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-cicd.html">CI/CD Pipeline</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="4-database.html" title="previous chapter">Database and models’ structure</a></li>
+      <li>Next: <a href="6-use_cases.html" title="next chapter">User guide with use cases</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, munchou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/5-api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

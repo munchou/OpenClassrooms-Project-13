@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quickstart : Running the application &#8212; munchou-p13 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database and models’ structure" href="4-database.html" />
+    <link rel="prev" title="Installing the app and necessary tools" href="2-installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="quickstart-running-the-application">
+<h1>Quickstart : Running the application<a class="headerlink" href="#quickstart-running-the-application" title="Link to this heading">¶</a></h1>
+<section id="starting-the-application-through-python">
+<h2>Starting the application through Python<a class="headerlink" href="#starting-the-application-through-python" title="Link to this heading">¶</a></h2>
+<p>To start the server, in your terminal (you must be in the app root folder where “manage.py” is located): <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></code> <br>
+You should get a message similar to that one:</p>
+<p><em>Performing system checks…</em> <br>
+<em>System check identified no issues (0 silenced).</em> <br>
+<em>September 22, 2023 - 16:55:07</em> <br>
+<em>Django version 3.0, using settings ‘oc_lettings_site.settings’</em> <br>
+<em>Starting development server at http://127.0.0.1:8000/</em> <br>
+<em>Quit the server with CTRL-BREAK.</em> <br></p>
+<p>Open your browser and connect to the app through either <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> or <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a></p>
+<p>To stop the server, press <em>CTRL+C</em> in the terminal.</p>
+</section>
+<section id="starting-the-application-through-docker">
+<h2>Starting the application through Docker<a class="headerlink" href="#starting-the-application-through-docker" title="Link to this heading">¶</a></h2>
+<p>You can start the application by using a Docker container. To do so, start Docker (if it is not already running in the background). <br>
+Download the image by opening the batch file “docker-pull-image.bat”. Enter your username and your password. If you could succesfully log in, you will be asked if you wish to download the image. Type “y”, press ENTER and wait for the image to have been downloaded. The program will automatically log you out once the download is complete.</p>
+<p>You will NOT see any new file in your folder. Instead, the image is automatically downloaded in a Docker’s corresponding folder and will directly appear in the Docker Desktop software. <br></p>
+<p>Get back to the Docker software, select the “Images” tab, and you should see the freshly downloaded image named “munchou/munchou_oc_p13” with the tag “latest”. <br>
+Click on the “run” button (the triangle) and in optional settings, type in “8000” in the “Ports” tab, then click “Run”. <br>
+A new container is created, and the image is run. You should see similar lines as above and some stuff about the /static/ folder:</p>
+<p><em>2023-09-22 21:49:05 Performing system checks…</em> <br>
+<em>2023-09-22 21:49:05 * |br|
+*2023-09-22 21:49:05 System check identified no issues (0 silenced).</em> <br>
+<em>2023-09-22 21:49:05 September 22, 2023 - 12:49:05</em> <br>
+<em>2023-09-22 21:49:05 Django version 3.0, using settings ‘oc_lettings_site.settings’</em> <br>
+<em>2023-09-22 21:49:05 Starting development server at http://0.0.0.0:8000/</em> <br>
+<em>2023-09-22 21:49:05 Quit the server with CONTROL-C.</em> <br>
+<em>…</em> <br>
+<em>2023-09-22 21:49:14 [22/Sep/2023 12:49:14] “GET /static/assets/img/logo.png HTTP/1.1” 200 27037</em> <br></p>
+<p>Open your browser and connect to the app through either <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> or <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a></p>
+<p>Once you are done, you can either press the stop button (the square) or directly press the trash can, which will stop the run and delete the current container.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">munchou-p13</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1-project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-installation.html">Installing the app and necessary tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart: running the app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#starting-the-application-through-python">Starting the application through Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-the-application-through-docker">Starting the application through Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="4-database.html">Database and models' structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-api.html">Description of the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-use_cases.html">User guide with use cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-cicd.html">CI/CD Pipeline</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="2-installation.html" title="previous chapter">Installing the app and necessary tools</a></li>
+      <li>Next: <a href="4-database.html" title="next chapter">Database and models’ structure</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, munchou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/3-apprun.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

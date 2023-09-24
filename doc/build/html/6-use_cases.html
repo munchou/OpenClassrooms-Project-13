@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>User guide with use cases &#8212; munchou-p13 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CI/CD Pipeline" href="7-cicd.html" />
+    <link rel="prev" title="Description of the API" href="5-api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="user-guide-with-use-cases">
+<h1>User guide with use cases<a class="headerlink" href="#user-guide-with-use-cases" title="Link to this heading">¶</a></h1>
+<section id="when-things-do-not-work">
+<h2>When things DO NOT work<a class="headerlink" href="#when-things-do-not-work" title="Link to this heading">¶</a></h2>
+<p>As seen in the previous section (API), the app will either return a 404 or 500 error web page (template) in case things go sour. Please refer to the paragraph <em>In case of errors: Sentry</em> for more details. <br></p>
+</section>
+<section id="when-things-work">
+<h2>When things work<a class="headerlink" href="#when-things-work" title="Link to this heading">¶</a></h2>
+<p>The user’s requests are (supposed to be) positively handled, returning a <em>status code 200</em> and displaying the corresponding page/information (template).</p>
+<p>Main page: displays the title and the buttons “Profile” and “Lettings”.</p>
+<p>Lettings page: displays the list of available lettings and the buttons “Home” and “Profiles”. Each letting is clickable and leads to its corresponding description page. <br>
+A letting page displays the letting’s information as well as the buttons “Back”, “Home” and “Profiles”.</p>
+<p>Profiles page: displays the list of existing profiles and the buttons “Home” and “Lettings”. Each profile is clickable and leads to its corresponding description page. <br>
+A profile page displays the profile’s information as well as the buttons “Back”, “Home” and “Lettings”.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">munchou-p13</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1-project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-installation.html">Installing the app and necessary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-apprun.html">Quickstart: running the app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-database.html">Database and models' structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-api.html">Description of the API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User guide with use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#when-things-do-not-work">When things DO NOT work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#when-things-work">When things work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="7-cicd.html">CI/CD Pipeline</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="5-api.html" title="previous chapter">Description of the API</a></li>
+      <li>Next: <a href="7-cicd.html" title="next chapter">CI/CD Pipeline</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, munchou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/6-use_cases.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

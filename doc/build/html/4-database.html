@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Database and models’ structure &#8212; munchou-p13 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Description of the API" href="5-api.html" />
+    <link rel="prev" title="Quickstart : Running the application" href="3-apprun.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="database-and-models-structure">
+<h1>Database and models’ structure<a class="headerlink" href="#database-and-models-structure" title="Link to this heading">¶</a></h1>
+<section id="sqlite3-database">
+<h2>SQLite3 Database<a class="headerlink" href="#sqlite3-database" title="Link to this heading">¶</a></h2>
+<p><em>SQLite is a C library that provides a lightweight disk-based database that doesn’t require a separate server process and allows accessing the database using a nonstandard variant of the SQL query language. It is a self-contained, file-based SQL database.</em> <br>
+As such, we do not need to install any modules or additional software as it comes bundled with Python, and Django natively uses it upon the creation of a new project.</p>
+</section>
+<section id="database-content">
+<h2>Database content<a class="headerlink" href="#database-content" title="Link to this heading">¶</a></h2>
+<p>There are 3 main objects in the database:</p>
+<p><strong>Profile (profiles_profile)</strong> <br>
+Users’ / Customers’ profiles. <br>
+Currently 4 profiles + the admin (not publicly listed). <br>
+Each profile has an id (not displayed), a favorite_city and a user_id (not displayed). <br>
+A profile displays some of the the user’s information stored in the “auth_user” table: first name, last name, email, and favorite city. <br></p>
+<p><strong>Lettings (lettings_letting)</strong> <br>
+Listed properties where their corresponding title is displayed. <br>
+Each letting has an id (not displayed), a title, and is linked to an address_id (not displayed, see below). <br></p>
+<p><strong>Address (lettings_address)</strong> <br>
+Addresses of each property. <br>
+An address has an id (not displayed), a number, a street, a city, a state, a zip code and a country ISO code. <br></p>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h2>
+<p>There are 3 models shared between “lettings” and “profiles” apps: Letting, Address and Profile. The following information is from the app’s docstrings.</p>
+<p><strong>lettings: Letting</strong> <br></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lettings.models.Letting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lettings.models.</span></span><span class="sig-name descname"><span class="pre">Letting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lettings.models.Letting" title="Link to this definition">¶</a></dt>
+<dd><p>Letting model with the following attributes:
+title -&gt; a title for the letting (up to 256 char.)
+address -&gt; FK (1to1) of the linked address</p>
+<p>class Meta’s verbose_name_plural -&gt; used for the admin
+panel to change the noun to its plural form if needed.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="lettings.models.Letting.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#lettings.models.Letting.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="lettings.models.Letting.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#lettings.models.Letting.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>lettings: Address</strong> <br></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lettings.models.Address">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lettings.models.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lettings.models.Address" title="Link to this definition">¶</a></dt>
+<dd><p>Address model with the following attributes:
+number -&gt; address/street number (1 to 9999)
+street -&gt; name of the city (up to 64 char.)
+state -&gt; state’s code (up to 2 char.)
+zip_code -&gt; zip code (1 to 99999)
+country_iso_code -&gt; the country’s ISO code (&gt;= 3 char.)</p>
+<p>class Meta’s verbose_name_plural -&gt; used for the admin
+panel to change the noun to its plural form if needed.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="lettings.models.Address.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#lettings.models.Address.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="lettings.models.Address.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#lettings.models.Address.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>profiles: Profile</strong> <br></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="profiles.models.Profile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">profiles.models.</span></span><span class="sig-name descname"><span class="pre">Profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#profiles.models.Profile" title="Link to this definition">¶</a></dt>
+<dd><p>Profile model with the following attributes:
+user -&gt; FK (1to1) of the linked user
+favorite_city -&gt; name of the user’s favorite city (up to 64 char.)</p>
+<p>class Meta’s verbose_name_plural -&gt; used for the admin
+panel to change the noun to its plural form if needed.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="profiles.models.Profile.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#profiles.models.Profile.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="profiles.models.Profile.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#profiles.models.Profile.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">munchou-p13</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1-project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-installation.html">Installing the app and necessary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-apprun.html">Quickstart: running the app</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database and models' structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sqlite3-database">SQLite3 Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-content">Database content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5-api.html">Description of the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-use_cases.html">User guide with use cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-cicd.html">CI/CD Pipeline</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="3-apprun.html" title="previous chapter">Quickstart : Running the application</a></li>
+      <li>Next: <a href="5-api.html" title="next chapter">Description of the API</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, munchou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/4-database.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
