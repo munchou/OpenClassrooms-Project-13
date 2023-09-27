@@ -1,9 +1,6 @@
 version: 2.1
 jobs:
   build:
-    branches:
-      only:
-        - mainy
     docker:
       - image: cimg/python:3.10.2
     steps:
@@ -44,9 +41,12 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/$IMAGE_NAME:latest
 
 workflows:
-  build-master:
+  build-and-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: mainwerwe
       - deploy:
           requires:
             - build
