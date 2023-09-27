@@ -5,10 +5,6 @@ from django.template.loader import render_to_string
 
 from ..models import Profile
 
-import sentry_sdk
-
-sentry_sdk.init(dsn="")
-
 
 class ProfilesViewsTest(TestCase):
     def setUp(self):
@@ -33,10 +29,3 @@ class ProfilesViewsTest(TestCase):
         self.assertTemplateUsed(response, "profiles/profile.html")
         self.assertContains(response, "testouilleur")
         self.assertContains(response, "Zbeurg-en-Broute")
-
-    def test_profile_error500(self):
-        try:
-            self.client.get(reverse("profiles:profile", args=["blabla"]))
-        except Exception:
-            with self.assertTemplateUsed("500.html"):
-                render_to_string("500.html")

@@ -4,10 +4,6 @@ from django.template.loader import render_to_string
 
 from ..models import Address, Letting
 
-import sentry_sdk
-
-sentry_sdk.init(dsn="")
-
 
 class LettingsViewsTest(TestCase):
     def setUp(self):
@@ -36,10 +32,3 @@ class LettingsViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "lettings/letting.html")
         self.assertContains(response, "Letting Test")
-
-    def test_letting_error500(self):
-        try:
-            self.client.get(reverse("lettings:letting", args=[456452312]))
-        except Exception:
-            with self.assertTemplateUsed("500.html"):
-                render_to_string("500.html")

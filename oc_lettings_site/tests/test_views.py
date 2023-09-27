@@ -1,10 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 
-import sentry_sdk
-
-sentry_sdk.init(dsn="")
-
 
 class OCLettingsSiteViewsTest(TestCase):
     def test_lettings_index(self):
