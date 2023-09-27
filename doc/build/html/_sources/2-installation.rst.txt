@@ -18,7 +18,9 @@ What you will need:
 Installing the application
 --------------------------
 * **Clone the repository OR download it**
-**CLONING:** |br|
+
+**CLONING:**
+
 To clone the repository, first create a folder where you want it to be installed. |br|
 Open your favorite terminal (Command Prompt...), go to that folder (``cd C:\yourpath\yourfolder\``) and initialize git by typing ``git init``. |br|
 You can now get the app by cloning the repository: ``git clone https://github.com/munchou/OpenClassrooms-Project-13.git`` |br|
@@ -28,6 +30,7 @@ Go to https://github.com/munchou/OpenClassrooms-Project-13, click the green butt
 Extract the ZIP file wherever you want the app to be. |br|
 
 * **Create a virtual environment and install the necessary dependencies**
+
 Once the repository in on your PC, though your terminal, go to that directory and create a virtual environment: |br|
 ``cd OpenClassrooms-Project-13`` (or any folder where the project is located) |br|
 ``python -m venv _env`` where _env is the name of the folder where the environment will be created. |br|
