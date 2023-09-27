@@ -4,6 +4,10 @@ from django.template.loader import render_to_string
 
 from ..models import Address, Letting
 
+import sentry_sdk
+
+sentry_sdk.init(dsn="")
+
 
 class LettingsViewsTest(TestCase):
     def setUp(self):

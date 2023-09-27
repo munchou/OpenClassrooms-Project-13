@@ -5,6 +5,10 @@ from django.template.loader import render_to_string
 
 from ..models import Profile
 
+import sentry_sdk
+
+sentry_sdk.init(dsn="")
+
 
 class ProfilesViewsTest(TestCase):
     def setUp(self):
