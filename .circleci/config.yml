@@ -46,7 +46,7 @@ workflows:
       - build:
           filters:
             branches:
-              only: mainwerwe
+              only: main
       - deploy:
           requires:
             - build
