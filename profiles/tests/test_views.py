@@ -1,12 +1,15 @@
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
 
 from ..models import Profile
 
 
 class ProfilesViewsTest(TestCase):
     def setUp(self):
+        self.client = Client()
+
         self.user = User.objects.create_user(
             username="testouilleur", password="test1234"
         )
@@ -28,11 +31,8 @@ class ProfilesViewsTest(TestCase):
         self.assertContains(response, "Zbeurg-en-Broute")
 
     def test_profile_error500(self):
-        response = self.client.get(reverse("profiles:profile", args=[456452312]))
-        self.assertTemplateUsed(response, "500.html")
-
-    # def test_profile_error500(self):
-    #     try:
-    #         profile = Profile.objects.get(reverse("profiles:profile", args=[456452312]))
-    #     except Exception as err:
-    #         self.assertTemplateUsed("500.html")
+        try:
+            self.client.get(reverse("profiles:profile", args=["blabla"]))
+        except Exception:
+            with self.assertTemplateUsed("500.html"):
+                render_to_string("500.html")

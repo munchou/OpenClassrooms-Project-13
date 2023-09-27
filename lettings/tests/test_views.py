@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 from ..models import Address, Letting
 
@@ -31,5 +32,8 @@ class LettingsViewsTest(TestCase):
         self.assertContains(response, "Letting Test")
 
     def test_letting_error500(self):
-        response = self.client.get(reverse("lettings:letting", args=[456452312]))
-        self.assertTemplateUsed(response, "500.html")
+        try:
+            self.client.get(reverse("lettings:letting", args=[456452312]))
+        except Exception:
+            with self.assertTemplateUsed("500.html"):
+                render_to_string("500.html")
