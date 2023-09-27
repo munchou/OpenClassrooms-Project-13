@@ -1,6 +1,9 @@
 version: 2.1
 jobs:
   build:
+    branches:
+      only:
+        - mainy
     docker:
       - image: cimg/python:3.10.2
     steps:

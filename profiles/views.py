@@ -1,4 +1,3 @@
-import sentry_sdk
 from django.shortcuts import render
 
 from .models import Profile
@@ -10,14 +9,9 @@ from .models import Profile
 def index(request):
     """Profile's main page.
     Displays all the available user profiles (list of the usernames)."""
-    try:
-        profiles_list = Profile.objects.all()
-        context = {"profiles_list": profiles_list}
-        return render(request, "profiles/index.html", context)
-    except Exception as err:
-        sentry_sdk.capture_message(f"500 error: {err} {request}")
-        # sentry_sdk.capture_exception(err)
-        return render(request, "500.html")
+    profiles_list = Profile.objects.all()
+    context = {"profiles_list": profiles_list}
+    return render(request, "profiles/index.html", context)
 
 
 # Aliquam sed metus eget nisi tincidunt ornare accumsan eget lac
@@ -26,11 +20,6 @@ def index(request):
 # Pellentesque habitant morbi tristique senectus et netus et males
 def profile(request, username):
     """Displays the profile's details of a selected user."""
-    try:
-        profile = Profile.objects.get(user__username=username)
-        context = {"profile": profile}
-        return render(request, "profiles/profile.html", context)
-    except Exception as err:
-        sentry_sdk.capture_message(f"500 error: {err} {request}")
-        # sentry_sdk.capture_exception(err)
-        return render(request, "500.html")
+    profile = Profile.objects.get(user__username=username)
+    context = {"profile": profile}
+    return render(request, "profiles/profile.html", context)

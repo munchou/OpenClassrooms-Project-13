@@ -12,4 +12,4 @@ urlpatterns = [
 ]
 
 handler404 = views.page_not_found_view
-# handler500 = views.server500
+handler500 = views.server500
