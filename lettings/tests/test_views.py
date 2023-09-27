@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
 from django.template.loader import render_to_string
 
@@ -7,6 +7,8 @@ from ..models import Address, Letting
 
 class LettingsViewsTest(TestCase):
     def setUp(self):
+        self.client = Client()
+
         self.address = Address.objects.create(
             number=42,
             street="Rue du Couperet",
