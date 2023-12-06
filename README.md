@@ -17,7 +17,7 @@ _Please note that to test the app locally, you DO NOT need Docker. If you wish t
 # Proof it ever deployed
 ![img](project13_liveversion.png)
 
-![img](pproject13_deployment_092023.png)
+![img](project13_deployment_092023.png)
 
 ![img](project13_circleci.png)
 
